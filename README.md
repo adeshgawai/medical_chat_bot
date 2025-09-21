@@ -1,4 +1,4 @@
-#Medical chat Bot Using RAG
+# Medical chat Bot Using RAG
 
 🩺 Medical Document Chatbot
 
@@ -21,23 +21,35 @@ Web Interface: Clean and responsive interface built with Flask.
 Dark Mode: Includes a theme toggler with saved preferences.
 
 📂 Project Structure:
-medical_chatbot/
+```bash
+MEDICAL_CHAT_BOT/
 │
-├── app.py                  # Main Flask application
-├── create_vector_store.py  # Script to upload document embeddings to Pinecone
-├── helper.py               # Helper functions (PDF parsing, embeddings, etc.)
-├── prompt.py               # Prompt template for the LLM
-├── requirements.txt        # Project dependencies
+├── data/                        # Folder for storing medical PDFs
+├── faiss_index/                 # (Optional) Local FAISS index (if used)
+├── RAG_based_medical_chatbot.e/ # (Executable / extra files)
 │
-├── data/                   # Store your PDF documents here
-│   ├── medical_doc_1.pdf
-│   └── ...
+├── research/                    
+│   └── trials.ipynb             # Jupyter notebooks for experiments
 │
-├── templates/              # Frontend templates
-│   └── index.html
+├── src/                         # Source code
+│   ├── __pycache__/             # Compiled cache
+│   ├── __init__.py
+│   ├── helper.py                # Helper functions
+│   └── prompt.py                # Prompt templates
 │
-└── static/                 # Static assets (CSS, JS, images)
-    └── style.css
+├── static/                      # Static assets (CSS, JS, images)
+├── templates/                   # Frontend templates (HTML)
+│
+├── .env                         # Environment variables
+├── .gitignore                   # Git ignore rules
+├── app.py                       # Main Flask application
+├── LICENSE                      # License file
+├── README.md                    # Project documentation
+├── requirements.txt             # Python dependencies
+├── setup.py                     # Setup script
+├── store_index.py               # Script to store embeddings in vector DB
+└── template.py                  # Extra template logic
+```
 ⚙️ Setup and Installation
 Prerequisites
 

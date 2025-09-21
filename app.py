@@ -1,5 +1,7 @@
 # app.py
 
+# pincone api: pcsk_oFofa_QLMwqK6pjNcL8n9v3fTXDhbmzf5HubXkvApsynWeHAgzXTgAmsDcSP4NB8NB8nU
+
 from flask import Flask, render_template, request, jsonify
 from langchain_community.vectorstores import FAISS
 from langchain_community.chat_models import ChatOllama

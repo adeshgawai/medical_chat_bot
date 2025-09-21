@@ -1,3 +1,5 @@
+#Medical chat Bot Using RAG
+
 🩺 Medical Document Chatbot
 
 This project is a sophisticated, locally-run medical chatbot that leverages a Retrieval-Augmented Generation (RAG) architecture. It allows users to ask questions about a collection of medical documents (PDFs) and receive accurate, context-aware answers through a user-friendly web interface.

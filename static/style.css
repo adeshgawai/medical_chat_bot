@@ -1,39 +1,40 @@
-/* --- Color Variables --- */
+/* --- Color Variables (Dark Slate & Teal/Emerald Accent) --- */
 :root {
-    --bg-color: #f0f2f5;
-    --chat-container-bg: #ffffff;
-    --text-color: #333;
-    --border-color: #e0e0e0;
-    --input-area-bg: #f8f9fa;
-    --input-border-color: #ccc;
-    --bot-message-bg: #e9ecef;
-    --user-message-bg: #007bff;
+    --bg-color: #0b0f19;
+    --chat-container-bg: #111827;
+    --text-color: #f3f4f6;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --input-area-bg: #1f2937;
+    --input-border-color: rgba(255, 255, 255, 0.1);
+    --bot-message-bg: rgba(31, 41, 55, 0.5);
+    --user-message-bg: #10b981;
     --user-message-text: #ffffff;
-    --header-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --button-bg: #667eea;
-    --button-hover-bg: #5a6fd6;
+    --header-gradient: linear-gradient(135deg, #111827 0%, #0b0f19 100%);
+    --button-bg: #10b981;
+    --button-hover-bg: #059669;
 }
 
-body.dark-mode {
-    --bg-color: #121212;
-    --chat-container-bg: #1e1e1e;
-    --text-color: #e0e0e0;
-    --border-color: #333;
-    --input-area-bg: #2c2c2c;
-    --input-border-color: #444;
-    --bot-message-bg: #3a3a3a;
-    --user-message-bg: #764ba2;
+body.light-mode {
+    --bg-color: #f0f5f3;
+    --chat-container-bg: #ffffff;
+    --text-color: #0f172a;
+    --border-color: #e2e8f0;
+    --input-area-bg: #f8fafc;
+    --input-border-color: #cbd5e1;
+    --bot-message-bg: #f1f5f9;
+    --user-message-bg: #10b981;
     --user-message-text: #ffffff;
-    --header-gradient: linear-gradient(135deg, #4e4376 0%, #2c2a4a 100%);
-    --button-bg: #764ba2;
-    --button-hover-bg: #6a4392;
+    --header-gradient: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+    --button-bg: #10b981;
+    --button-hover-bg: #059669;
 }
 
 
 /* --- General Styles --- */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
+    background: var(--bg-color);
+    background-image: linear-gradient(135deg, var(--bg-color) 0%, #111827 100%);
     color: var(--text-color);
     margin: 0;
     display: flex;
@@ -96,7 +97,7 @@ body {
     line-height: 1.5;
 }
 
-.message p {
+.message p, .message-bubble {
     padding: 12px 18px;
     border-radius: 18px;
     margin: 0;
@@ -106,7 +107,7 @@ body {
     align-self: flex-end;
 }
 
-.user-message p {
+.user-message p, .user-message .message-bubble {
     background-color: var(--user-message-bg);
     color: var(--user-message-text);
     border-bottom-right-radius: 4px;
@@ -116,7 +117,7 @@ body {
     align-self: flex-start;
 }
 
-.bot-message p {
+.bot-message p, .bot-message .message-bubble {
     background-color: var(--bot-message-bg);
     color: var(--text-color);
     border-bottom-left-radius: 4px;
@@ -168,6 +169,32 @@ body {
     background-color: var(--button-hover-bg);
 }
 
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+
 /* --- Theme Switcher --- */
 .theme-switcher {
     position: relative;
@@ -207,7 +234,7 @@ body {
 }
 
 input:checked + .slider {
-    background-color: #764ba2;
+    background-color: #10b981;
 }
 
 input:checked + .slider:before {
@@ -225,4 +252,56 @@ input:checked + .slider:before {
 @keyframes bounce {
     0%, 80%, 100% { transform: scale(0); }
     40% { transform: scale(1.0); }
+}
+
+/* --- Markdown Body Formatting --- */
+.markdown-body {
+    width: 100%;
+}
+
+.markdown-body > *:first-child {
+    margin-top: 0 !important;
+}
+
+.markdown-body > *:last-child {
+    margin-bottom: 0 !important;
+}
+
+.markdown-body p {
+    margin: 8px 0;
+    padding: 0 !important;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+}
+
+.markdown-body ul, .markdown-body ol {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+
+.markdown-body li {
+    margin-bottom: 4px;
+}
+
+.markdown-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.markdown-body th, .markdown-body td {
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.markdown-body th {
+    background-color: rgba(0, 0, 0, 0.05);
+    font-weight: 600;
+}
+
+body.dark-mode .markdown-body th {
+    background-color: rgba(255, 255, 255, 0.07);
 }

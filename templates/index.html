@@ -6,6 +6,8 @@
     <title>Medical Chatbot</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <div class="chat-container">
@@ -14,10 +16,16 @@
                 <h1>Medical Assistant</h1>
                 <p>Ask a question about the medical documents.</p>
             </div>
-            <!-- Dark Mode Toggle Switch -->
-            <div class="theme-switcher">
-                <input type="checkbox" id="theme-toggle">
-                <label for="theme-toggle" class="slider"></label>
+            <div class="header-controls">
+                <!-- Dark Mode Toggle Switch -->
+                <div class="theme-switcher">
+                    <input type="checkbox" id="theme-toggle">
+                    <label for="theme-toggle" class="slider"></label>
+                </div>
+                <!-- Logout Button -->
+                <button id="logout-btn" class="logout-btn" title="Log Out">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                </button>
             </div>
         </div>
         <div class="chat-box" id="chat-box">
@@ -44,11 +52,11 @@
         // Function to set the theme
         function setTheme(isDark) {
             if (isDark) {
-                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
                 themeToggle.checked = true;
                 localStorage.setItem('theme', 'dark');
             } else {
-                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
                 themeToggle.checked = false;
                 localStorage.setItem('theme', 'light');
             }
@@ -56,15 +64,27 @@
 
         // Check for saved theme in localStorage
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            setTheme(true);
-        } else {
+        if (savedTheme === 'light') {
             setTheme(false);
+        } else {
+            setTheme(true); // Default to dark mode to match the landing page
         }
 
         // Event listener for the toggle switch
         themeToggle.addEventListener('change', () => {
             setTheme(themeToggle.checked);
+        });
+
+        // --- Logout Logic ---
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/logout');
+                if (response.ok) {
+                    window.location.href = '/';
+                }
+            } catch (error) {
+                console.error('Error logging out:', error);
+            }
         });
 
 
@@ -117,7 +137,7 @@
                 // Display bot's answer
                 const botMessageDiv = document.createElement('div');
                 botMessageDiv.className = 'message bot-message';
-                botMessageDiv.innerHTML = `<p>${botAnswer}</p>`;
+                botMessageDiv.innerHTML = `<div class="message-bubble markdown-body">${marked.parse(botAnswer)}</div>`;
                 chatBox.appendChild(botMessageDiv);
                 chatBox.scrollTop = chatBox.scrollHeight;
 

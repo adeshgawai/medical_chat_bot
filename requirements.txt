@@ -1,10 +1,14 @@
-sentence-transformers==2.2.2
+sentence-transformers>=2.7.0
 langchain
+langchain-community
+langchain-core
+langchain_experimental
 flask
 pypdf
 python-dotenv
 pinecone[grpc]
 langchain-pinecone
-langchain_community
-langchain_experimental
+huggingface_hub>=0.23.0
+transformers>=4.40.0
+faiss-cpu
 -e .

@@ -1,8 +1,8 @@
-from langchain.document_loaders import PyPDFLoader, DirectoryLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import FAISS
-
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_huggingface import HuggingFaceEmbeddings
+# import txtai
+# from langchain_community.embeddings import FastEmbedEmbeddings
 
 def load_pdf_file(data):
     loader = DirectoryLoader(
@@ -23,8 +23,13 @@ def text_spltter(extracted_docs):
     return text_chunks
 
 
+# def embedding_creation():
+#     embeddings = HuggingFaceEmbeddings(
+#         model_name="sentence-transformers/all-MiniLM-L6-v2"
+#     )
+#     return embeddings
+
 def embedding_creation():
-    embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
-    )
+    embeddings = HuggingFaceEmbeddings(model_name="NeuML/pubmedbert-base-embeddings")
+
     return embeddings
